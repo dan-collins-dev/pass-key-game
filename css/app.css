@@ -1,0 +1,63 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.guess-container {
+    margin: 1rem 0;
+}
+
+.slot-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.action-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.action-btn {
+    padding: .5rem 1rem;
+    min-width: none;
+}
+
+.num-input {
+    padding: .5rem 1rem;
+    min-width: none;
+}
+
+.slot {
+    display: flex;
+    min-width: 64px;
+    min-height: 64px;
+    background-color: rgb(193, 178, 178);
+    border: .1rem solid black;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+
+/* Dynamic Styles */
+
+.correct-color {
+    background-color: green;
+}
+
+.wrong-color {
+    background-color: red;
+}
+
+.empty-color {
+    background-color: rgb(193, 178, 178);
+}
