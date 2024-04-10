@@ -4,7 +4,8 @@ const submitBtn = document.getElementById("submit-btn");
 const clearBtn = document.getElementById("clear-btn");
 let currentSlotIdx = 0;
 const counts = {};
-const onMatch = new Event("app:onMatch");
+const onMatch = new CustomEvent("app:onMatch");
+const renderSlots = new CustomEvent("app:renderSlots", {detail: {counts}});
 
 let guess = [];
 const answer = [];
@@ -12,7 +13,7 @@ const answer = [];
 numBtns.forEach((element, idx, arr) => {
     element.addEventListener("click", () => {
         if (guess.length === answer.length) {
-            element.dispatchEvent(onMatch);
+            // element.dispatchEvent(onMatch);
             submitBtn.disabled = false;
         } else {
             guess.push(+element.textContent);
@@ -21,7 +22,7 @@ numBtns.forEach((element, idx, arr) => {
         }
 
         if (guess.length === answer.length) {
-            element.dispatchEvent(onMatch);
+            // element.dispatchEvent(onMatch);
             submitBtn.disabled = false;
         }
     });
@@ -39,35 +40,85 @@ submitBtn.disabled = true;
 
 // Contains the logic for matching guess against answer
 // as well removing invalid
-const matchSlots = () => {
+const matchSlots = (e) => {
     let currentCounts = structuredClone(counts);
-    // currentCounts = counts;
     submitBtn.disabled = true;
-    slots.forEach((element, idx, arr) => {
-        if (answer[idx] === +guess[idx]) {
-            element.classList.add("correct-color");
-            currentCounts[answer[idx]] -= 1;
-            console.log(currentCounts);
-        } else {
-            // if (answer.includes(+guess[idx] && currentCounts[answer[idx]] > 0)) {
-            //     element.classList.add("includes-color");
-            // } else {
-            //     element.classList.add("wrong-color");
-            // }
+    let matchObj = new Map();
+    // let colorMatches = [];
 
-            if (answer.includes(+guess[idx])) {
-                if (currentCounts[answer[idx]] > 0) {
-                    element.classList.add("includes-color");
-                    // currentCounts[answer[idx]] -= 1;
-                } else {
-                    element.classList.add("wrong-color");
-                }
-            } else {
-                element.classList.add("wrong-color");
-            }
+    slots.forEach((element, idx, arr) => {
+        console.log(`Anser Index Value: ${answer[idx]}`)
+        if (answer[idx] === +guess[idx]) {
+            currentCounts[]
+            matchObj.set(idx, {slot: element, correct: true, correctPosition: true, guess: +guess[idx], answer: answer[idx], numCounts: 0});
+        } else if (answer.includes(+guess[idx]) && answer[idx] !== +guess[idx]) {
+            matchObj.set(idx, {slot: element, correct: true, correctPosition: false, guess: +guess[idx], answer: answer[idx], numCounts: 0});
+        } else {
+            matchObj.set(idx, {slot: element, correct: false, correctPosition: false, guess: +guess[idx], answer: answer[idx], numCounts: 0});
         }
     });
+    console.log(matchObj)
+
+    // style corrects
+    matchObj.forEach((element) => {
+        console.log(element);
+    })
+
+    let incorrectMap = new Map()
+    // Style slots
+    matchObj.forEach((element, idx, arr) => {
+        // console.log(`Value of Answer IDX: ${answer[idx]}`)
+        console.log(`Element num counts: ${element.numCounts}`)
+
+        if (element.correct === false) {
+            element.slot.classList.add("wrong-color")
+        }
+
+        if (element.correct === true && element.correctPosition === false) {
+            element.numCounts += 1;
+            if (element.numCounts > counts[idx]) {
+                element.slot.classList.add("wrong-color")
+            }
+            else {
+
+                element.slot.classList.add("includes-color");
+            }
+        }
+
+        if (element.correct === true && element.correctPosition === true) {
+            element.numCounts += 1
+            
+             element.slot.classList.add("correct-color")
+            // if () {
+            //     element.slot.classList.add("correct-color")
+
+            // }
+            // else {
+            //     element.slot.classList.add("includes-color")
+            // }
+            // element.numCounts -= 1
+        
+        }
+        else if (element.correct == true && element.correctPosition === false) {
+            element.numCounts += 1;
+            if (element.numCounts <= currentCounts[answer[idx]]) {
+                element.slot.classList.add("includes-color")
+            } else {
+                element.slot.classList.add("wrong-color")
+            }
+        }
+
+        else {
+            element.slot.classList.add("wrong-color")
+        }
+    });
+    // console.log(incorrectMap)
 };
+
+const updateStyles = (arr) => {
+    console.log(arr)
+}
+
 
 submitBtn.addEventListener("click", matchSlots);
 
@@ -89,7 +140,7 @@ const generateKey = () => {
     for (let i = 0; i < 4; i++) {
         answer[i] = Math.floor(Math.random() * 4);
     }
-    console.log(answer);
+    console.log(`Answer: ${answer}`);
 };
 
 const createCountList = () => {

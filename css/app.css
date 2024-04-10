@@ -54,10 +54,9 @@
     background-color: green;
 }
 
-.wrong-color {
-    background-color: red;
-}
-
 .includes-color {
     background-color: rgb(193, 166, 32);
+}
+.wrong-color {
+    background-color: red;
 }
