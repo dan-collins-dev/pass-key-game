@@ -1,3 +1,5 @@
+// testing different branches
+
 const slots = Array.from(document.getElementsByClassName("slot"));
 const numBtns = Array.from(document.getElementsByClassName("num-input"));
 const submitBtn = document.getElementById("submit-btn");
