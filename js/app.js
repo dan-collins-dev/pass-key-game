@@ -1,47 +1,60 @@
-
-
 const slots = Array.from(document.getElementsByClassName("slot"));
+const slotRows = Array.from(document.getElementsByClassName("slot-container"));
 const numBtns = Array.from(document.getElementsByClassName("num-input"));
 const submitBtn = document.getElementById("submit-btn");
 const clearBtn = document.getElementById("clear-btn");
 let currentSlotIdx = 0;
 const counts = {};
-
+console.log(slotRows[0]);
+console.log(slotRows.length);
 let guess = [];
 const answer = [];
 
+// Loops through number buttons and adds the event that
+// handles ui changes on number button submit when
+// guess length matches answer length
 numBtns.forEach((element, idx, arr) => {
     element.addEventListener("click", () => {
-        if (guess.length === answer.length) submitBtn.disabled = false;
-        else {
+        if (guess.length !== answer.length) {
             guess.push(+element.textContent);
             slots[currentSlotIdx].textContent = element.textContent;
             currentSlotIdx += 1;
-
-            if (guess.length === answer.length) submitBtn.disabled = false;
         }
+        if (guess.length === answer.length) submitBtn.disabled = false;
     });
 });
 
-submitBtn.disabled = true;
 
-
+// Matches and colors slots in a guess
 const matchSlots = (e) => {
     let currentCounts = structuredClone(counts);
     submitBtn.disabled = true;
-    let matchMap = new Map();
 
+    // Performs matching and assigns the initial style
     slots.forEach((element, idx, arr) => {
-        console.log(`Anser Index Value: ${answer[idx]}`)
-        if (answer[idx] === +guess[idx]) {
-            matchMap.set(idx, {slot: element, correct: true, correctPosition: true});
-        } else if (answer.includes(+guess[idx]) && answer[idx] !== +guess[idx]) {
-            matchMap.set(idx, {slot: element, correct: true, correctPosition: false});
+        if (!answer.includes(guess[idx])) {
+            element.classList.add("wrong-color");
         } else {
-            matchMap.set(idx, {slot: element, correct: false, correctPosition: false});
+            if (answer[idx] === guess[idx]) {
+                element.classList.add("correct-color");
+            } else {
+                element.classList.add("includes-color");
+            }
+            currentCounts[guess[idx]] -= 1;
         }
     });
-    console.log(matchMap)
+
+    // Repaints included items if the number exceeds the number
+    // of occurences of the number
+    slots.forEach((element, idx, arr) => {
+        if (element.classList.contains("includes-color")) {
+            if (currentCounts[guess[idx]] < 0) {
+                element.classList.replace("includes-color", "wrong-color");
+            }
+        }
+    });
+
+    console.log(currentCounts);
 };
 
 submitBtn.addEventListener("click", matchSlots);
@@ -73,6 +86,7 @@ const createCountList = () => {
     });
 };
 
+submitBtn.disabled = true;
 generateKey();
 createCountList();
 console.log(counts);
