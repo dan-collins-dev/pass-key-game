@@ -1,4 +1,4 @@
-// testing different branches again
+
 
 const slots = Array.from(document.getElementsByClassName("slot"));
 const numBtns = Array.from(document.getElementsByClassName("num-input"));
@@ -12,18 +12,13 @@ const answer = [];
 
 numBtns.forEach((element, idx, arr) => {
     element.addEventListener("click", () => {
-        if (guess.length === answer.length) {
-            // element.dispatchEvent(onMatch);
-            submitBtn.disabled = false;
-        } else {
+        if (guess.length === answer.length) submitBtn.disabled = false;
+        else {
             guess.push(+element.textContent);
             slots[currentSlotIdx].textContent = element.textContent;
             currentSlotIdx += 1;
-        }
 
-        if (guess.length === answer.length) {
-            // element.dispatchEvent(onMatch);
-            submitBtn.disabled = false;
+            if (guess.length === answer.length) submitBtn.disabled = false;
         }
     });
 });
