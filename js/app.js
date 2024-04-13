@@ -1,5 +1,4 @@
-// testing different branches
-// first attempt push to main (didn't want)
+// testing different branches again
 
 const slots = Array.from(document.getElementsByClassName("slot"));
 const numBtns = Array.from(document.getElementsByClassName("num-input"));
