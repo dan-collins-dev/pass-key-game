@@ -59,6 +59,7 @@ const disconnectBtns = () => {
 const matchSlots = (e) => {
     let currentCounts = structuredClone(counts);
     submitBtn.disabled = true;
+    clearBtn.disabled = true
 
     let sr = Array.from(slotRows[currentSlotRow].children)
     // Performs matching and assigns the initial style
