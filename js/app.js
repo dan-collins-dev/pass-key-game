@@ -1,3 +1,5 @@
+'use strict';
+
 const slots = Array.from(document.getElementsByClassName("slot"));
 const slotRows = Array.from(document.getElementsByClassName("slot-container"));
 let currentSlotRow = 0
@@ -10,32 +12,20 @@ let guess = [];
 const answer = [];
 let slotRow = Array.from(slotRows[currentSlotRow].children)
 
-const testSlots = slotRows[0]
-console.log(testSlots)
-
 const moveToNextRow = new Event("moveToNextRow")
 
 window.addEventListener("moveToNextRow", () => {
-    // disconnectBtns()
     currentSlotRow += 1
     guess.length = [];
-    // currentSlotIdx = 0;
-    
-    console.log(`Current Slot Idx: ${currentSlotIdx}`)
-    console.log(`Current guess and length: ${guess}, ${guess.length}`)
-    // connectBtns();
 })
 
 // Loops through number buttons and adds the event that
 // handles ui changes on number button submit when
 // guess length matches answer length
 const connectBtns = () => {
-    console.log(`Current Slot Row: ${currentSlotRow}`)
-    console.log(slotRows[currentSlotRow])
-    let sr = Array.from(slotRows[0].children)
+    // let sr = Array.from(slotRows[0].children)
     numBtns.forEach((element, idx, arr) => {
         element.addEventListener("click", () => {
-            // console.log(slotRow[idx].nodeValue)
             if (guess.length !== answer.length) {
                 guess.push(+element.textContent);
                 slots[currentSlotIdx].textContent = element.textContent;
@@ -68,7 +58,6 @@ const matchSlots = (e) => {
     submitBtn.disabled = true;
 
     let sr = Array.from(slotRows[currentSlotRow].children)
-    console.log(sr);
     // Performs matching and assigns the initial style
     sr.forEach((element, idx, arr) => {
         if (!answer.includes(guess[idx])) {
@@ -105,19 +94,18 @@ const matchSlots = (e) => {
         return
     }
     
-    
     window.dispatchEvent(moveToNextRow);
-    console.log("DONT PRINT IF MATCH")
-    // if not full match, if not at last row, move to the next row and add listeners
 };
 
 submitBtn.addEventListener("click", matchSlots);
 
 const clearSlots = () => {
+    let clearIdx = currentSlotIdx % 4;
+    if (clearIdx === 0) clearIdx = 4;
+    currentSlotIdx -= clearIdx;
     let sr = Array.from(slotRows[currentSlotRow].children)
     sr.forEach((element, idx, arr) => {
         guess.length = 0;
-        currentSlotIdx = 0;
         element.textContent = "";
         element.classList.remove("correct-color");
         element.classList.remove("wrong-color");
@@ -145,6 +133,8 @@ submitBtn.disabled = true;
 generateKey();
 createCountList();
 connectBtns();
+
+// Prints out the number of occurances for each generated number
 console.log(counts);
 
 // set up first row listeners
