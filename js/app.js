@@ -26,6 +26,9 @@ const connectBtns = () => {
     // let sr = Array.from(slotRows[0].children)
     numBtns.forEach((element, idx, arr) => {
         element.addEventListener("click", () => {
+            if (clearBtn.disabled) {
+                clearBtn.disabled = false;
+            }
             if (guess.length !== answer.length) {
                 guess.push(+element.textContent);
                 slots[currentSlotIdx].textContent = element.textContent;
@@ -110,8 +113,8 @@ const clearSlots = () => {
         element.classList.remove("correct-color");
         element.classList.remove("wrong-color");
         element.classList.remove("includes-color");
-        submitBtn.disabled = true;
     });
+    clearBtn.disabled = true;
 };
 
 clearBtn.addEventListener("click", clearSlots);
