@@ -4,9 +4,14 @@
     font-family: 'Ubuntu Mono', 'Montserrat', monospace;
 }
 
+body {
+    background-color: rgb(13, 13, 92);
+}
+
 #app {
     display: grid;
     grid-template-columns: 1fr;
+    grid-template-rows: 4fr;
     background-color: rgb(13, 13, 92);
 }
 
@@ -14,11 +19,11 @@
     background-color: rgb(67, 67, 212);
     display: flex;
     padding: 1rem 0;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .header-title {
-    padding: 0 1rem
+    padding: 0 1rem;
 }
 
 .name {
@@ -26,21 +31,20 @@
 }
 
 .guess-container {
-    margin: 1rem 0;
+    margin: .5rem 0;
 }
 
 .slot-container {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: .5rem;
 }
 
 .input-container {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1rem 0;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .5rem;
+    margin: 1rem auto;
 }
 
 .action-container {
@@ -69,6 +73,10 @@
     justify-content: center;
     align-items: center;
     font-size: 2rem;
+}
+
+.hide {
+    visibility: hidden;
 }
 
 
