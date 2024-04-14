@@ -8,10 +8,21 @@ body {
     background-color: rgb(13, 13, 92);
 }
 
+footer {
+    margin-top: 1rem;
+    color: white;
+    display: grid;
+    /* justify-content: space-between; */
+    /* align-items: center; */
+    background-color: rgb(67, 67, 212);
+    /* filter: invert(1); */
+    
+}
+
 #app {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 4fr;
+    grid-template-rows: 5fr;
     background-color: rgb(13, 13, 92);
 }
 
@@ -20,10 +31,13 @@ body {
     display: flex;
     padding: 1rem 0;
     justify-content: center;
+    margin-bottom: .25rem;
 }
 
 .header-title {
     padding: 0 1rem;
+    font-size: 2rem;
+    font-weight: bolder;
 }
 
 .name {
@@ -76,7 +90,7 @@ body {
 }
 
 .hide {
-    visibility: hidden;
+    visibility: collapse;
 }
 
 

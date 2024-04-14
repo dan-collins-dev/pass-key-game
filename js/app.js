@@ -134,6 +134,7 @@ const createCountList = () => {
 };
 
 submitBtn.disabled = true;
+clearBtn.disabled = true;
 generateKey();
 createCountList();
 connectBtns();
