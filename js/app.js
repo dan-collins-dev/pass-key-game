@@ -116,6 +116,7 @@ const clearSlots = () => {
         element.classList.remove("includes-color");
     });
     clearBtn.disabled = true;
+    submitBtn.disabled = true;
 };
 
 clearBtn.addEventListener("click", clearSlots);

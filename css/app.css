@@ -6,17 +6,29 @@
 
 body {
     background-color: rgb(13, 13, 92);
+    /* background-color: rgb(67, 67, 212); */
+    /* min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto 1fr; */
+}
+
+a {
+    padding: 0 1rem
 }
 
 footer {
-    margin-top: 1rem;
     color: white;
-    display: grid;
+    display: flex;
     /* justify-content: space-between; */
     /* align-items: center; */
     background-color: rgb(67, 67, 212);
     /* filter: invert(1); */
     
+}
+
+.footer-container {
+    /* display: flex;
+    justify-content: space-between; */
 }
 
 #app {
@@ -28,16 +40,18 @@ footer {
 
 #app-header {
     background-color: rgb(67, 67, 212);
-    display: flex;
-    padding: 1rem 0;
-    justify-content: center;
-    margin-bottom: .25rem;
+    padding: .5rem 0;
+    display: grid;
+    align-items: center;
+    align-content: center;
+    grid-template-columns: 1fr 3fr 1fr;
 }
 
 .header-title {
     padding: 0 1rem;
     font-size: 2rem;
     font-weight: bolder;
+    text-align: center;
 }
 
 .name {
@@ -70,12 +84,14 @@ footer {
 .action-btn {
     padding: .5rem 1rem;
     min-width: none;
+    border-radius: .5rem;
 }
 
 .num-input {
     padding: .5rem 1rem;
     min-width: none;
-    background-color: green;
+    background-color: rgb(149, 189, 242);
+    border-radius: .5rem;
 }
 
 .slot {
@@ -87,6 +103,7 @@ footer {
     justify-content: center;
     align-items: center;
     font-size: 2rem;
+    border-radius: .5rem;
 }
 
 .hide {
