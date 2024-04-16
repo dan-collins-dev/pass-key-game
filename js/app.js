@@ -13,6 +13,13 @@ const answer = [];
 let slotRow = Array.from(slotRows[currentSlotRow].children)
 
 const moveToNextRow = new Event("moveToNextRow")
+/* 
+    TODO:
+        - Create event that fires when guess is correct
+        - Create event that fires when guess is wrong
+        - Write logic for handling these conditions as well as
+          behavior for both modals
+*/
 
 window.addEventListener("moveToNextRow", () => {
     currentSlotRow += 1
@@ -51,9 +58,6 @@ const disconnectBtns = () => {
         });
     });
 }
-
-
-
 
 // Matches and colors slots in a guess
 const matchSlots = (e) => {
@@ -95,6 +99,7 @@ const matchSlots = (e) => {
     // do a complete match
     if (guess.every(isEqual)) {
         console.log("COMPLETE MATCH")
+        // dispatch win event
         return
     }
     
@@ -142,5 +147,3 @@ connectBtns();
 
 // Prints out the number of occurances for each generated number
 console.log(counts);
-
-// set up first row listeners
