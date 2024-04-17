@@ -1,5 +1,7 @@
 'use strict';
-
+const winModal = document.getElementById("win-modal")
+const reloadBtn = document.getElementById("reload-btn");
+console.log(reloadBtn)
 const slots = Array.from(document.getElementsByClassName("slot"));
 const slotRows = Array.from(document.getElementsByClassName("slot-container"));
 let currentSlotRow = 0
@@ -20,10 +22,19 @@ const moveToNextRow = new Event("moveToNextRow")
         - Write logic for handling these conditions as well as
           behavior for both modals
 */
+const winEvent = new Event("winEvent")
 
 window.addEventListener("moveToNextRow", () => {
     currentSlotRow += 1
     guess.length = [];
+})
+
+window.addEventListener("winEvent", () => {
+    winModal.style.display = "block";
+})
+
+reloadBtn.addEventListener("click", () => {
+    window.location.reload();
 })
 
 // Loops through number buttons and adds the event that
@@ -94,13 +105,9 @@ const matchSlots = (e) => {
         return element === answer[idx]
     }
     
-    console.log(currentCounts);
-    
     // do a complete match
     if (guess.every(isEqual)) {
-        console.log("COMPLETE MATCH")
-        // dispatch win event
-        return
+        window.dispatchEvent(winEvent)
     }
     
     window.dispatchEvent(moveToNextRow);

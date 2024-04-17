@@ -8,13 +8,7 @@
     </head>
     <body>
         <header id="app-header">
-            <a href="https://github.com/dan-collins-dev">
-                <img
-                    src="./imgs/1218140_github_icon.png"
-                    alt="Github logo and link"
-                />
-            </a>
-            <p class="header-title">Guess the Number</p>
+            <h1 class="header-title">Guess the Number</h1>
         </header>
         <main id="app">
             <section class="guess-container">
@@ -88,6 +82,31 @@
             - Show win message
             - Ok button that reloads document
         -->
+
+        <div id="win-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>You win!</h2>
+                </div>
+
+                <div class="modal-body">
+                    <p>Congratulations</p>
+                    <p>You have guessed the pass key correctly</p>
+                    <button id="reload-btn">Ok</button>
+                </div>
+
+                <div class="modal-footer">
+                    <a href="https://github.com/dan-collins-dev">
+                        <img
+                            src="./imgs/1218140_github_icon.png"
+                            alt="Github logo and link"
+                        />
+                    </a>
+                    <p>Dan Collins</p>
+                </div>
+                    
+            </div>
+        </div>
 
         <!--
             Modal to be displayed for loss condition
