@@ -1,7 +1,9 @@
 'use strict';
 const winModal = document.getElementById("win-modal")
-const reloadBtn = document.getElementById("reload-btn");
-console.log(reloadBtn)
+const loseModal = document.getElementById("lose-modal")
+const loseMsg = document.getElementById("lose-msg")
+const loseReloadBtn = document.getElementById("lose-reload-btn");
+const winReloadBtn = document.getElementById("win-reload-btn");
 const slots = Array.from(document.getElementsByClassName("slot"));
 const slotRows = Array.from(document.getElementsByClassName("slot-container"));
 let currentSlotRow = 0
@@ -15,14 +17,8 @@ const answer = [];
 let slotRow = Array.from(slotRows[currentSlotRow].children)
 
 const moveToNextRow = new Event("moveToNextRow")
-/* 
-    TODO:
-        - Create event that fires when guess is correct
-        - Create event that fires when guess is wrong
-        - Write logic for handling these conditions as well as
-          behavior for both modals
-*/
 const winEvent = new Event("winEvent")
+const loseEvent = new Event("loseEvent")
 
 window.addEventListener("moveToNextRow", () => {
     currentSlotRow += 1
@@ -33,7 +29,17 @@ window.addEventListener("winEvent", () => {
     winModal.style.display = "block";
 })
 
-reloadBtn.addEventListener("click", () => {
+window.addEventListener("loseEvent", () => {
+    loseModal.style.display = "block";
+    loseMsg.textContent = `The answer was ${answer}`;
+
+})
+
+loseReloadBtn.addEventListener("click", () => {
+    window.location.reload();
+})
+
+winReloadBtn.addEventListener("click", () => {
     window.location.reload();
 })
 
@@ -108,6 +114,11 @@ const matchSlots = (e) => {
     // do a complete match
     if (guess.every(isEqual)) {
         window.dispatchEvent(winEvent)
+    }
+
+    if (currentSlotRow === 4) {
+        console.log("lose")
+        window.dispatchEvent(loseEvent);
     }
     
     window.dispatchEvent(moveToNextRow);

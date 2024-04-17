@@ -92,7 +92,7 @@
                 <div class="modal-body">
                     <p>Congratulations</p>
                     <p>You have guessed the pass key correctly</p>
-                    <button id="reload-btn">Ok</button>
+                    <button id="win-reload-btn">Ok</button>
                 </div>
 
                 <div class="modal-footer">
@@ -104,7 +104,6 @@
                     </a>
                     <p>Dan Collins</p>
                 </div>
-                    
             </div>
         </div>
 
@@ -115,6 +114,29 @@
             - Ok button that reloads document 
          -->
 
+        <div id="lose-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>You lose!</h2>
+                </div>
+
+                <div class="modal-body">
+                    <p>Sorry!</p>
+                    <p id="lose-msg"></p>
+                    <button id="lose-reload-btn">Ok</button>
+                </div>
+
+                <div class="modal-footer">
+                    <a href="https://github.com/dan-collins-dev">
+                        <img
+                            src="./imgs/1218140_github_icon.png"
+                            alt="Github logo and link"
+                        />
+                    </a>
+                    <p>Dan Collins</p>
+                </div>
+            </div>
+        </div>
 
         <script src="./js/app.js"></script>
     </body>

@@ -161,7 +161,18 @@ footer {
     padding: .25rem 0;
 }
 
-#reload-btn {
+#win-reload-btn {
+    text-align: center;
+    font-size: larger;
+    border: none;
+    border-top: 0;
+    margin: 1rem;
+    padding: .5rem 1rem;
+    min-width: none;
+    border-radius: .5rem;
+}
+
+#lose-reload-btn {
     text-align: center;
     font-size: larger;
     border: none;
